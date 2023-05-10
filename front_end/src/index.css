@@ -60,7 +60,6 @@ body {
 }
 .todo {
   display: flex;
-
   width: 100%;
   justify-content: space-around;
   margin-top: 0.3rem;
@@ -118,4 +117,48 @@ input[type='checkbox'] {
   width: 20px;
   height: 20px;
   margin-right: 0.5rem;
+}
+
+.editcontainer {
+  display: flex;
+  width: 500px;
+  justify-content: space-around;
+  margin-top: 0.3rem;
+  background-color: rgb(230, 226, 233);
+  align-items: center;
+  border-radius: 30px;
+  padding: 0.5rem;
+}
+.edit-del-button {
+  padding: 0.28rem;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(213, 17, 17);
+}
+.update-button {
+  padding: 0.28rem;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(21, 209, 21);
+}
+.edit-input {
+  letter-spacing: 1px;
+  height: 35px;
+  width: 70%;
+  border-radius: 20px;
+  border: none;
+  padding: 0.7rem;
+  font-size: 18px;
+  margin-right: 0.3rem;
+  outline-width: 0;
+}
+.edit-del-button:hover {
+  color: white;
+  cursor: pointer;
+}
+.update-button:hover {
+  color: white;
+  cursor: pointer;
 }

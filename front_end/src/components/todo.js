@@ -1,18 +1,30 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-export const Todo = ({ todolist, settodolist, task, completed, id }) => {
-  console.log(todolist);
+export const Todo = ({
+  todolist,
+  settodolist,
+  task,
+  completed,
+  id,
+  editmode,
+  seteditmode,
+  edittask,
+  setedittask,
+}) => {
   const [checked, setchecked] = useState(completed);
   async function handlecheck() {
-    const res = await axios.patch(`http://localhost:8000/api/tasks/${id}`, {
+    await axios.patch(`http://localhost:8000/api/tasks/${id}`, {
       completed: !checked,
     });
     setchecked(!checked);
-    console.log(res);
   }
-  function edithandler() {}
-  async function deletehandler() {
+  function edithandler(id, task, completed) {
+    seteditmode(!editmode);
+    const updatedtask = { id: id, task: task, completed: completed };
+    setedittask(updatedtask);
+  }
+  async function deletehandler(id) {
     try {
       await axios.delete(`http://localhost:8000/api/tasks/${id}`);
       settodolist(
@@ -38,10 +50,22 @@ export const Todo = ({ todolist, settodolist, task, completed, id }) => {
         />
       </div>
       <div className='delete'>
-        <button onClick={deletehandler}>del</button>
+        <button
+          onClick={() => {
+            deletehandler(id);
+          }}
+        >
+          del
+        </button>
       </div>
       <div className='edit'>
-        <button onClick={edithandler}>edit</button>
+        <button
+          onClick={() => {
+            edithandler(id, task, completed);
+          }}
+        >
+          edit
+        </button>
       </div>
     </div>
   );

@@ -2,7 +2,14 @@ import React from 'react';
 import { Todo } from './todo';
 import { useEffect } from 'react';
 import axios from 'axios';
-export const ToDoContainer = ({ todolist, settodolist }) => {
+export const ToDoContainer = ({
+  todolist,
+  settodolist,
+  editmode,
+  seteditmode,
+  edittask,
+  setedittask,
+}) => {
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/tasks`)
@@ -17,7 +24,6 @@ export const ToDoContainer = ({ todolist, settodolist }) => {
   return (
     <div className='todocontainer'>
       <h3>Your Tasks</h3>
-
       {todolist.map((item) => {
         return (
           <Todo
@@ -26,9 +32,14 @@ export const ToDoContainer = ({ todolist, settodolist }) => {
             task={item.task}
             completed={item.completed}
             id={item._id}
+            editmode={editmode}
+            seteditmode={seteditmode}
+            edittask={edittask}
+            setedittask={setedittask}
           />
         );
       })}
+      :
     </div>
   );
 };
