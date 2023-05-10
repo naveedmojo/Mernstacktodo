@@ -1,13 +1,34 @@
 import React from 'react';
 import { Todo } from './todo';
-export const ToDDoContainer = () => {
+import { useEffect } from 'react';
+import axios from 'axios';
+export const ToDoContainer = ({ todolist, settodolist }) => {
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/tasks`)
+      .then((res) => {
+        settodolist(res.data);
+      })
+      .catch((err) => {
+        console.log(`error happened in fetching from database =>  ${err}`);
+      });
+  });
+
   return (
     <div className='todocontainer'>
       <h3>Your Tasks</h3>
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
+
+      {todolist.map((item) => {
+        return (
+          <Todo
+            todolist={todolist}
+            settodolist={settodolist}
+            task={item.task}
+            completed={item.completed}
+            id={item._id}
+          />
+        );
+      })}
     </div>
   );
 };

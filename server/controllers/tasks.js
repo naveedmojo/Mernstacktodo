@@ -11,11 +11,9 @@ exports.getAllTasks = async (req, res) => {
 };
 exports.createTask = async (req, res) => {
   try {
-    const task = new Task({
-      task: req.body.task,
-    });
+    const task = new Task(req.body);
     const response = await task.save();
-    res.status(200).json('created task succesfully');
+    res.status(200).json(response);
   } catch (err) {
     console.error('Error in retreiving tasks', err);
     res.status(500).json({ error: 'Failed to create task' });
